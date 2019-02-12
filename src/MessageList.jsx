@@ -11,11 +11,13 @@ import React, { Component } from "react";
 import Message from './Message.jsx';
 class MessageList extends Component {
     render() {
+        const messages = this.props.messages.map((message) =>
+            <Message message={message} key={message.id}/>
+        );
         return(
-            <main className="messages">
-            <Message />
-            <div className="message system">Hello!</div>
-            </main>
+            <div>
+            <main className="messages"> {messages} </main>
+            </div>
         );
     }
 }
