@@ -19,13 +19,24 @@ const wss = new SocketServer({ server });
 // Set up a callback that will run when a client connects to the server
 // When a client connects they are assigned a socket, represented by
 // the ws parameter in the callback.
+
+
 wss.on('connection', (ws) => {
   console.log('Client connected');
 
   ws.on('message', function (message) {
-    // console.log(message.JSON.parse(','));
-    const msg = JSON.parse(message);
-    console.log("User " + msg.username + " says " + msg.content + "!");
+
+    let msg = JSON.parse(message);
+
+    if(msg.type === "postMessage") {
+    msg.type = "incomingMessage";
+    }
+
+    if(msg.notification === "postNotification") {
+      msg.notification = "incomingNotification";
+    }
+
+    console.log(msg.notification);
 
     wss.clients.forEach(function each(client) {
       if (client.readyState === SocketOpen.OPEN) {

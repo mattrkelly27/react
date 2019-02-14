@@ -6,20 +6,24 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUser: {name: "User"}, 
-      messages: []
+      currentUser: "user", 
+      messages: [],
+  
     };
     this.addNewMessage = this.addNewMessage.bind(this);
   }
     
   
   addNewMessage(content) {
-    console.log("we are in the app.jsx") 
-    // const newMessage = {id: content.id, username: content.username, content: content.content};
+    // // console.log("we are in the app.jsx") 
+    // const newMessage = {id: content.id, username: content.username, content: content.content, type: content.type};
+    // console.log(newMessage);
     // const messages = this.state.messages.concat(newMessage);
+    // // console.log(messages);
     // this.setState({messages: messages })
     
     let msg = JSON.stringify(content);
+    
     this.socket.send(msg);
   }
 
@@ -31,12 +35,29 @@ class App extends Component {
     }
 
     this.socket.onmessage = (content) => {
-      console.log(content);
-      const newMessage = JSON.parse(content.data);
-      const allMessages = this.state.messages.concat(newMessage);
-      this.setState({messages: allMessages});
 
-    }
+      let newMessage = JSON.parse(content.data);
+      let allMessages = "";
+  
+      
+      switch(newMessage.notification) {
+
+        case "incomingMessage":
+        allMessages = this.state.messages.concat(newMessage)
+        this.setState({messages: allMessages});
+        alert("incomingMessage");
+          break;
+
+        case "incomingNotification":
+
+        alert("get Outta here!");
+          break;
+      
+        default:
+          // show an error in the console if the message type is unknown
+          throw "Unknown event type " + newMessage.type;
+      };
+    };
   
 
     // console.log("componentDidMount <App />");
@@ -59,7 +80,11 @@ class App extends Component {
     </nav>
       <MessageList messages={this.state.messages}/>
       <ChatBar user={this.state.currentUser.name} addNewMessage={this.addNewMessage}/> 
+      
   </div>
+  
+ 
+
     );
   }
 }

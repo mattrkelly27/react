@@ -16,7 +16,10 @@ class MessageList extends Component {
         );
         return(
             <div>
-            <main className="messages"> {messages} </main>
+                <main className="messages"> {messages} </main>
+                <div className="notification">
+                    <span className="notification-content">Bob changed their name to {this.props.messages.username}.</span>
+                </div>
             </div>
         );
     }
