@@ -6,7 +6,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentUser: {name: "Bob"}, 
+      currentUser: {name: "User"}, 
       messages: []
     };
     this.addNewMessage = this.addNewMessage.bind(this);
@@ -15,25 +15,29 @@ class App extends Component {
   
   addNewMessage(content) {
     console.log("we are in the app.jsx") 
-    const newMessage = {id: Date.now(), username: content.username, content: content.content};
-    const messages = this.state.messages.concat(newMessage);
-    this.setState({messages: messages })
-    // this.socket.send(`User ${newMessage.username} said ${newMessage.content}!`);
+    // const newMessage = {id: content.id, username: content.username, content: content.content};
+    // const messages = this.state.messages.concat(newMessage);
+    // this.setState({messages: messages })
+    
     let msg = JSON.stringify(content);
     this.socket.send(msg);
-
-    this.socket.onmessage = (event) => {
-      console.log(event);
-      // code to handle incoming message
-    }
   }
 
   componentDidMount(content) {
     this.socket = new WebSocket(`ws://${window.location.hostname}:3001`);
+
     this.socket.onopen = (content) => {
       console.log("hello!");
     }
-    
+
+    this.socket.onmessage = (content) => {
+      console.log(content);
+      const newMessage = JSON.parse(content.data);
+      const allMessages = this.state.messages.concat(newMessage);
+      this.setState({messages: allMessages});
+
+    }
+  
 
     // console.log("componentDidMount <App />");
     // setTimeout(() => {
