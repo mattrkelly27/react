@@ -1,5 +1,7 @@
 h1 {
   color: tomato;
+  font-family: Century Gothic, sans-serif;
+  
 }
 body {
   background: white;
@@ -7,6 +9,7 @@ body {
   font-family: 'Open Sans', sans-serif;
   font-size: 14px;
   margin: 70px 0;
+  font-family: Century Gothic, sans-serif;
 }
 
 .chatbar {
@@ -18,6 +21,7 @@ body {
   padding: 5px;
   position: fixed;
   right: 0;
+  font-family: Century Gothic, sans-serif;
 }
 
 .chatbar-message,
@@ -28,24 +32,29 @@ body {
   line-height: 40px;
   margin: 5px;
   padding: 0 9px;
+  font-family: Century Gothic, sans-serif;
 }
 
 .chatbar-message {
   flex: 8;
+  font-family: Century Gothic, sans-serif;
 }
 
 .chatbar-username {
   flex: 2;
+  font-family: Century Gothic, sans-serif;
 }
 
 .message {
   display: flex;
   padding: 5px;
+  font-family: Century Gothic, sans-serif;
 }
 
 .message.system {
   font-style: italic;
   padding: 5px 20px;
+  font-family: Century Gothic, sans-serif;
 }
 
 .message-content,
@@ -53,15 +62,18 @@ body {
   overflow: hidden;
   margin: 5px;
   padding: 0 10px;
+  font-family: Century Gothic, sans-serif;
 }
 
 .message-content {
   flex: 8;
+  font-family: Century Gothic, sans-serif;
 }
 
 .message-username {
   flex: 2;
   font-weight: 700;
+  font-family: Century Gothic, sans-serif;
 }
 
 .navbar {
@@ -73,6 +85,7 @@ body {
   position: fixed;
   right: 0;
   top: 0;
+  font-family: Century Gothic, sans-serif;
 }
 
 .navbar-brand {
@@ -85,4 +98,9 @@ body {
   line-height: 60px;
   padding: 0 10px;
   text-decoration: none;
+  font-family: Century Gothic, sans-serif;
+}
+
+.chatbar-button{
+display: none
 }
