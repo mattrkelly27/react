@@ -3,17 +3,18 @@ import ChatBar from './ChatBar.jsx';
 import MessageList from './MessageList.jsx';
 
 class App extends Component {
+  
   constructor(props) {
     super(props);
     this.state = {
-      currentUser: "user", 
+      currentUser: "anon", 
       messages: [],
-  
+      numberOfPages: 0
     };
     this.addNewMessage = this.addNewMessage.bind(this);
   }
     
-  
+
   addNewMessage(content) {
     // // console.log("we are in the app.jsx") 
     // const newMessage = {id: content.id, username: content.username, content: content.content, type: content.type};
@@ -23,6 +24,7 @@ class App extends Component {
     // this.setState({messages: messages })
     
     let msg = JSON.stringify(content);
+    console.log(msg);
     
     this.socket.send(msg);
   }
@@ -40,17 +42,21 @@ class App extends Component {
       let allMessages = "";
   
       
-      switch(newMessage.notification) {
+      switch(newMessage.type) {
 
         case "incomingMessage":
         allMessages = this.state.messages.concat(newMessage)
         this.setState({messages: allMessages});
-        alert("incomingMessage");
           break;
 
         case "incomingNotification":
+        this.setState({currentUser: newMessage.username })
+          break;
 
-        alert("get Outta here!");
+        case "usercount":
+        let number = newMessage.size
+        this.setState({numberOfPages: number});
+        // alert(number);
           break;
       
         default:
@@ -76,10 +82,11 @@ class App extends Component {
     return (
   <div>
     <nav className="navbar">
-      <a href="/" className="navbar-brand">Chatty</a>
+      <a href="/" className="navbar-brand">magna enim conversationem USERS ONLINE: {this.state.numberOfPages}</a>
     </nav>
       <MessageList messages={this.state.messages}/>
-      <ChatBar user={this.state.currentUser.name} addNewMessage={this.addNewMessage}/> 
+      <ChatBar user={this.state.currentUser} addNewMessage={this.addNewMessage}/> 
+
       
   </div>
   

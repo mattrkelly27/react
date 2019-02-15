@@ -11,6 +11,8 @@ class Message extends Component {
             <div className="message">
             <span className="message-username">{this.props.message.username}</span>
             <span className="message-content">{this.props.message.content}</span>
+            <span className="notification-content">NOTIFICATION===> {this.props.notification} changed their name to {this.props.message.username}</span>
+
             </div>
         );
     }

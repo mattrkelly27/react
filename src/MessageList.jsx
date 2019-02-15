@@ -14,12 +14,12 @@ class MessageList extends Component {
         const messages = this.props.messages.map((message) =>
             <Message message={message} key={message.id}/>
         );
+        const notifications = this.props.messages.map((message) =>
+            <Message notification={message.notification}/>
+        );
         return(
             <div>
                 <main className="messages"> {messages} </main>
-                <div className="notification">
-                    <span className="notification-content">Bob changed their name to {this.props.messages.username}.</span>
-                </div>
             </div>
         );
     }
