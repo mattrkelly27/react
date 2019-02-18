@@ -9,9 +9,11 @@ class Message extends Component {
         
         return(
             <div className="message">
-            <span className="message-username">{this.props.message.username}</span>
-            <span className="message-content">{this.props.message.content}</span>
-            <span className="notification-content">NOTIFICATION===> {this.props.notification} changed their name to {this.props.message.username}</span>
+                <span className="message-username">{this.props.message.username}</span>
+                <span className="message-content">{this.props.message.content}</span>
+                <div className="notification">
+                    <span className="notification-content">TO BE SURE: {this.props.user} changed their name to {this.props.message.username}</span>
+                </div>
 
             </div>
         );

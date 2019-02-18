@@ -12,7 +12,7 @@ import Message from './Message.jsx';
 class MessageList extends Component {
     render() {
         const messages = this.props.messages.map((message) =>
-            <Message message={message} key={message.id}/>
+            <Message message={message} key={message.id} user={this.props.user} />
         );
         const notifications = this.props.messages.map((message) =>
             <Message notification={message.notification}/>
