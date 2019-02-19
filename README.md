@@ -6,7 +6,7 @@ A client-side SPA (single-page app) built with ReactJS.
 ## Screenshot
 
 
-
+https://github.com/mattrkelly27/react/blob/master/docs/Chatty-%20one%20user%20online.png
 
 ## Dependencies
 
