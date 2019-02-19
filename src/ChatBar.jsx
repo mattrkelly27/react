@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 class ChatBar extends Component {
     constructor(props) {
         super(props);
@@ -8,7 +7,6 @@ class ChatBar extends Component {
             messages: []
           };
     }
-
     onSubmit = evt => {
         evt.preventDefault();
         const content = {
@@ -22,7 +20,6 @@ class ChatBar extends Component {
         this.props.addNewMessage(content);
         evt.target.elements.newMessage.value = "";
     };
-
     render() {
         return(
             <form onSubmit={this.onSubmit}>
@@ -35,5 +32,4 @@ class ChatBar extends Component {
         );
     }
 }
-
 export default ChatBar;
