@@ -11,6 +11,7 @@ class App extends Component {
       numberOfPages: 0
     };
     this.addNewMessage = this.addNewMessage.bind(this);
+    this.addNotificationMessage = this.addNotificationMessage.bind(this);
   }
 
   addNewMessage(content) {  //send message to server
@@ -18,6 +19,16 @@ class App extends Component {
     let msg = JSON.stringify(content);
     this.socket.send(msg);
   }
+
+  addNotificationMessage(content) {
+    content.oldName = this.state.currentUser
+
+    this.setState({currentUser: content.newName})
+
+    let msg = JSON.stringify(content);
+    this.socket.send(msg);
+  }
+
   componentDidMount(content) {
     this.socket = new WebSocket(`ws://${window.location.hostname}:3001`);
     this.socket.onopen = (content) => {
@@ -32,7 +43,9 @@ class App extends Component {
         this.setState({messages: allMessages});
           break;
         case "incomingNotification":
-        this.setState({currentUser: newMessage.username }) // displays notification
+        // this.setState({currentUser: newMessage.username }) // displays notification
+        allMessages = this.state.messages.concat(newMessage) // displays new message as well as all old messages
+        this.setState({messages: allMessages});
           break;
         case "usercount": // displays number of users online
         let number = newMessage.size
@@ -50,7 +63,7 @@ class App extends Component {
       <a href="/" className="navbar-brand">magna enim conversationem -- USERS ONLINE: {this.state.numberOfPages}</a>
     </nav>
       <MessageList messages={this.state.messages} user={this.state.currentUser}/>
-      <ChatBar user={this.state.currentUser} addNewMessage={this.addNewMessage}/>   
+      <ChatBar user={this.state.currentUser} addNewMessage={this.addNewMessage} addNotificationMessage={this.addNotificationMessage} />   
   </div>
     );
   }

@@ -41,13 +41,14 @@ wss.on('connection', (ws) => {
   ws.on('message', function (message) {
 
     let msg = JSON.parse(message);
+    console.log(msg);
 
     if(msg.type === "postMessage") {
     msg.type = "incomingMessage";
     }
 
-    if(msg.notification === "postNotification") {
-      msg.notification = "incomingNotification";
+    if(msg.type === "postNotification") {
+      msg.type = "incomingNotification";
     }
 
 
