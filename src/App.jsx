@@ -12,7 +12,9 @@ class App extends Component {
     };
     this.addNewMessage = this.addNewMessage.bind(this);
   }
+
   addNewMessage(content) {  //send message to server
+    content.username = this.state.currentUser
     let msg = JSON.stringify(content);
     this.socket.send(msg);
   }
